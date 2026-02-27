@@ -12,12 +12,21 @@ export default function ProfileScreen() {
   const handleLogout = () => {
     showAlert('Logout', 'Are you sure you want to logout?', [
       { text: 'Cancel', style: 'cancel' },
+<<<<<<< HEAD
       {
         text: 'Logout',
         style: 'destructive',
         onPress: () => {
           showAlert('Logged Out', 'You have been successfully logged out');
           router.replace('/');
+=======
+      { 
+        text: 'Logout', 
+        style: 'destructive',
+        onPress: () => {
+          showAlert('Logged Out', 'You have been successfully logged out');
+          router.back();
+>>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
         }
       }
     ]);
@@ -92,7 +101,11 @@ export default function ProfileScreen() {
       </View>
 
       {/* Logout Button */}
+<<<<<<< HEAD
       <Pressable
+=======
+      <Pressable 
+>>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
         style={({ pressed }) => [
           styles.logoutButton,
           pressed && styles.logoutButtonPressed
