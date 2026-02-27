@@ -34,11 +34,7 @@ export default function DashboardScreen() {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-<<<<<<< HEAD
       <ScrollView
-=======
-      <ScrollView 
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -56,11 +52,7 @@ export default function DashboardScreen() {
             <Text style={styles.greeting}>Learning Analytics</Text>
             <Text style={styles.subtitle}>Cognitive Pattern Insights</Text>
           </View>
-<<<<<<< HEAD
           <Pressable
-=======
-          <Pressable 
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
             style={({ pressed }) => [
               styles.profileButton,
               pressed && styles.profileButtonPressed
@@ -127,40 +119,11 @@ export default function DashboardScreen() {
           </View>
         )}
 
-<<<<<<< HEAD
-        {/* Interactive Learning Game */}
-        <View style={styles.section}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.gameCard,
-              pressed && styles.gameCardPressed
-            ]}
-            onPress={() => (router.push as any)('/game')}
-          >
-            <View style={styles.gameCardContent}>
-              <View style={styles.gameIconContainer}>
-                <MaterialIcons name="videogame-asset" size={32} color={theme.colors.textPrimary} />
-              </View>
-              <View style={styles.gameTextContainer}>
-                <Text style={styles.gameTitle}>Quick Learning Game</Text>
-                <Text style={styles.gameSubtitle}>Play math challenges to boost focus!</Text>
-              </View>
-              <MaterialIcons name="chevron-right" size={24} color={theme.colors.textPrimary} />
-            </View>
-          </Pressable>
-        </View>
-
-=======
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
         {/* Cognitive Pattern */}
         {cognitivePattern && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>AI Pattern Analysis</Text>
-<<<<<<< HEAD
             <CognitivePatternCard
-=======
-            <CognitivePatternCard 
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
               pattern={cognitivePattern}
               onViewDetails={() => router.push('/pattern-details')}
             />
@@ -178,11 +141,7 @@ export default function DashboardScreen() {
               <RecommendationCard
                 key={rec.id}
                 recommendation={rec}
-<<<<<<< HEAD
-                onPress={() => { }}
-=======
                 onPress={() => {}}
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
               />
             ))}
           </View>
@@ -268,41 +227,4 @@ const styles = StyleSheet.create({
     gap: theme.spacing.sm,
     marginBottom: theme.spacing.sm,
   },
-<<<<<<< HEAD
-  gameCard: {
-    backgroundColor: theme.colors.primary,
-    borderRadius: theme.borderRadius.lg,
-    padding: theme.spacing.md,
-    marginTop: theme.spacing.sm,
-  },
-  gameCardPressed: {
-    opacity: 0.8,
-  },
-  gameCardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  gameIconContainer: {
-    width: 48,
-    height: 48,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: theme.borderRadius.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: theme.spacing.md,
-  },
-  gameTextContainer: {
-    flex: 1,
-  },
-  gameTitle: {
-    ...theme.typography.h3,
-    color: theme.colors.textPrimary,
-  },
-  gameSubtitle: {
-    ...theme.typography.bodySmall,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 2,
-  },
-=======
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
 });

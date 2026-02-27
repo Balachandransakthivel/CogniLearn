@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -61,13 +62,12 @@ export default function ParentDashboardScreen() {
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-<<<<<<< HEAD
-          <Pressable onPress={() => router.replace('/')} style={styles.backButton}>
-            <MaterialIcons name="logout" size={24} color={theme.colors.danger} />
-=======
+          {/* Removed merge conflict markers and chose one of the options.
+              Assuming the intention was to keep the navigation back/logout functionality.
+              If a specific choice was preferred, it should be clarified.
+              For now, I'll pick the 'arrow-back' for general navigation. */}
           <Pressable onPress={() => router.back()} style={styles.backButton}>
             <MaterialIcons name="arrow-back" size={24} color={theme.colors.textPrimary} />
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
           </Pressable>
           <View style={styles.headerContent}>
             <Text style={styles.title}>Parent Dashboard</Text>
@@ -184,28 +184,19 @@ export default function ParentDashboardScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Alerts</Text>
             <View style={styles.alertCard}>
-<<<<<<< HEAD
+              {/* Removed merge conflict markers and chose one of the options.
+                  Assuming the intention was to use the styling from the chosen branch. */}
               <MaterialIcons
                 name="warning"
                 size={28}
                 color={metrics.riskLevel === 'high' ? theme.colors.danger : theme.colors.warning}
-=======
-              <MaterialIcons 
-                name="warning" 
-                size={28} 
-                color={metrics.riskLevel === 'high' ? theme.colors.danger : theme.colors.warning} 
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
               />
               <View style={styles.alertContent}>
                 <Text style={styles.alertTitle}>
                   {metrics.riskLevel === 'high' ? 'High Risk Detected' : 'Attention Needed'}
                 </Text>
                 <Text style={styles.alertText}>
-<<<<<<< HEAD
                   {metrics.riskLevel === 'high'
-=======
-                  {metrics.riskLevel === 'high' 
->>>>>>> d0bdba425f7f45638e107178aa831519a4f30fcd
                     ? 'Your child may need additional support. Consider scheduling a review session.'
                     : 'Some areas showing declining performance. Monitor progress closely.'
                   }
