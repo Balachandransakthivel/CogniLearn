@@ -9,20 +9,16 @@ export default function DemoLoginScreen() {
     const insets = useSafeAreaInsets();
     const router = useRouter();
 
-    const handleLogin = (role: 'student' | 'parent') => {
-        // In a real app, you would set authentication state here
-        if (role === 'student') {
-            router.replace('/(tabs)');
-        } else {
-            router.push('/parent-dashboard');
-        }
+    const handleLogin = (role: 'student' | 'parent' | 'teacher') => {
+        // Navigate to the newly created login page, passing the appropriate role
+        router.push(`/login?role=${role}` as any);
     };
 
     return (
         <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
             <View style={styles.header}>
                 <View style={styles.logoContainer}>
-                    <MaterialIcons name="psychology" size={60} color={theme.colors.primary} />
+                    <Image source={require('../assets/images/logo.png')} style={{ width: 80, height: 80, resizeMode: 'contain' }} />
                 </View>
                 <Text style={styles.title}>CogniLearn</Text>
                 <Text style={styles.subtitle}>AI-Powered Learning Analytics</Text>
@@ -69,12 +65,30 @@ export default function DemoLoginScreen() {
                     </View>
                     <MaterialIcons name="arrow-forward" size={24} color={theme.colors.secondaryDark} />
                 </Pressable>
+
+                <Pressable
+                    style={({ pressed }) => [
+                        styles.roleCard,
+                        styles.teacherCard,
+                        pressed && styles.roleCardPressed
+                    ]}
+                    onPress={() => handleLogin('teacher')}
+                >
+                    <View style={styles.iconWrapper}>
+                        <MaterialIcons name="menu-book" size={40} color={theme.colors.success} />
+                    </View>
+                    <View style={styles.roleInfo}>
+                        <Text style={styles.roleTitle}>Teacher Demo</Text>
+                        <Text style={styles.roleSubtitle}>Class overview & unique AI reports</Text>
+                    </View>
+                    <MaterialIcons name="arrow-forward" size={24} color={theme.colors.success} />
+                </Pressable>
             </View>
 
             <View style={styles.footer}>
                 <Text style={styles.footerText}>Demonstration Environment</Text>
             </View>
-        </View>
+        </View >
     );
 }
 
@@ -138,6 +152,9 @@ const styles = StyleSheet.create({
     },
     parentCard: {
         borderColor: 'rgba(0, 184, 230, 0.3)',
+    },
+    teacherCard: {
+        borderColor: 'rgba(76, 175, 80, 0.3)',
     },
     roleCardPressed: {
         transform: [{ scale: 0.98 }],
