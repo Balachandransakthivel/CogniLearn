@@ -163,7 +163,6 @@ export default function DashboardScreen() {
             </Pressable>
           </ScrollView>
         </View>
-
         {/* Cognitive Pattern */}
         {cognitivePattern && (
           <View style={styles.section}>

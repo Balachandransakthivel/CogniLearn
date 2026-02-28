@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -179,6 +180,7 @@ export default function ParentDashboardScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Alerts</Text>
             <View style={styles.alertCard}>
+
               <MaterialIcons
                 name="warning"
                 size={28}
