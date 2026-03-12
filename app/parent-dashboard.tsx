@@ -62,8 +62,12 @@ export default function ParentDashboardScreen() {
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
-          <Pressable onPress={() => router.replace('/')} style={styles.backButton}>
-            <MaterialIcons name="logout" size={24} color={theme.colors.danger} />
+          {/* Removed merge conflict markers and chose one of the options.
+              Assuming the intention was to keep the navigation back/logout functionality.
+              If a specific choice was preferred, it should be clarified.
+              For now, I'll pick the 'arrow-back' for general navigation. */}
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <MaterialIcons name="arrow-back" size={24} color={theme.colors.textPrimary} />
           </Pressable>
           <View style={styles.headerContent}>
             <Text style={styles.title}>Parent Dashboard</Text>
@@ -180,7 +184,8 @@ export default function ParentDashboardScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Alerts</Text>
             <View style={styles.alertCard}>
-
+              {/* Removed merge conflict markers and chose one of the options.
+                  Assuming the intention was to use the styling from the chosen branch. */}
               <MaterialIcons
                 name="warning"
                 size={28}

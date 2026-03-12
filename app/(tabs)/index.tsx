@@ -9,7 +9,6 @@ import { CognitivePatternCard } from '@/components/feature/CognitivePatternCard'
 import { RecommendationCard } from '@/components/feature/RecommendationCard';
 import { SessionHistoryCard } from '@/components/feature/SessionHistoryCard';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function DashboardScreen() {
   const insets = useSafeAreaInsets();
@@ -48,10 +47,10 @@ export default function DashboardScreen() {
         }
       >
         {/* Header */}
-        <LinearGradient colors={[theme.colors.primary, '#9C27B0']} style={styles.headerGradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+        <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>Learning Analytics</Text>
-            <Text style={styles.subtitle}>Welcome back, keep learning!</Text>
+            <Text style={styles.subtitle}>Cognitive Pattern Insights</Text>
           </View>
           <Pressable
             style={({ pressed }) => [
@@ -60,9 +59,9 @@ export default function DashboardScreen() {
             ]}
             onPress={() => router.push('/profile')}
           >
-            <MaterialIcons name="account-circle" size={48} color="#FFFFFF" />
+            <MaterialIcons name="account-circle" size={40} color={theme.colors.primary} />
           </Pressable>
-        </LinearGradient>
+        </View>
 
         {/* Key Metrics Grid */}
         {metrics && (
@@ -78,9 +77,9 @@ export default function DashboardScreen() {
                 trendValue={`${metrics.focusScore >= 70 ? '+' : ''}${Math.abs(metrics.focusScore - 70)}`}
               />
               <MetricCard
-                title="Distraction Index"
-                value="Low"
-                icon="mobile-off"
+                title="Engagement"
+                value={metrics.engagementScore}
+                icon="psychology"
                 color={theme.colors.secondary}
                 trend={metrics.engagementScore >= 70 ? 'up' : 'neutral'}
                 trendValue={`${metrics.engagementScore}%`}
@@ -88,10 +87,10 @@ export default function DashboardScreen() {
             </View>
             <View style={styles.metricsGrid}>
               <MetricCard
-                title="Consistency Score"
-                value="85%"
-                subtitle="Daily habit"
-                icon="event-available"
+                title="Accuracy Trend"
+                value={`${metrics.accuracyTrend}%`}
+                subtitle="Recent performance"
+                icon="trending-up"
                 color={theme.colors.success}
               />
               <MetricCard
@@ -111,58 +110,15 @@ export default function DashboardScreen() {
                 trend={metrics.weeklyGrowth >= 0 ? 'up' : 'down'}
               />
               <MetricCard
-                title="Exam Readiness"
-                value="72%"
-                icon="online-prediction"
-                color={theme.colors.success}
+                title="Risk Level"
+                value={metrics.riskLevel.toUpperCase()}
+                icon="warning"
+                color={getRiskColor()}
               />
             </View>
           </View>
         )}
 
-        {/* Interactive Learning Games */}
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { marginBottom: 12, fontSize: 18, fontWeight: 'bold', color: theme.colors.textPrimary }]}>Boost Your Skills</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 16 }}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.gameCard,
-                { width: 260, marginTop: 0 },
-                pressed && styles.gameCardPressed
-              ]}
-              onPress={() => (router.push as any)('/game')}
-            >
-              <View style={styles.gameCardContent}>
-                <View style={styles.gameIconContainer}>
-                  <MaterialIcons name="calculate" size={32} color={theme.colors.textPrimary} />
-                </View>
-                <View style={styles.gameTextContainer}>
-                  <Text style={styles.gameTitle}>Math</Text>
-                  <Text style={styles.gameSubtitle}>Boost math focus!</Text>
-                </View>
-              </View>
-            </Pressable>
-
-            <Pressable
-              style={({ pressed }) => [
-                styles.gameCard,
-                { width: 260, marginTop: 0, backgroundColor: theme.colors.secondary },
-                pressed && styles.gameCardPressed
-              ]}
-              onPress={() => (router.push as any)('/memory-game')}
-            >
-              <View style={styles.gameCardContent}>
-                <View style={styles.gameIconContainer}>
-                  <MaterialIcons name="psychology" size={32} color={theme.colors.textPrimary} />
-                </View>
-                <View style={styles.gameTextContainer}>
-                  <Text style={styles.gameTitle}>Memory Match</Text>
-                  <Text style={styles.gameSubtitle}>Improve cognitive recall</Text>
-                </View>
-              </View>
-            </Pressable>
-          </ScrollView>
-        </View>
         {/* Cognitive Pattern */}
         {cognitivePattern && (
           <View style={styles.section}>
@@ -185,7 +141,7 @@ export default function DashboardScreen() {
               <RecommendationCard
                 key={rec.id}
                 recommendation={rec}
-                onPress={() => { }}
+                onPress={() => {}}
               />
             ))}
           </View>
@@ -221,22 +177,19 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: theme.spacing.md,
   },
-  headerGradient: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: theme.spacing.lg,
-    padding: theme.spacing.xl,
-    borderRadius: theme.borderRadius.xl,
-    ...theme.shadows.medium,
   },
   greeting: {
     ...theme.typography.h2,
-    color: '#FFFFFF',
+    color: theme.colors.textPrimary,
   },
   subtitle: {
     ...theme.typography.bodySmall,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: theme.colors.textSecondary,
     marginTop: 4,
   },
   profileButton: {
@@ -273,39 +226,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: theme.spacing.sm,
     marginBottom: theme.spacing.sm,
-  },
-  gameCard: {
-    backgroundColor: theme.colors.primary,
-    borderRadius: theme.borderRadius.lg,
-    padding: theme.spacing.md,
-    marginTop: theme.spacing.sm,
-  },
-  gameCardPressed: {
-    opacity: 0.8,
-  },
-  gameCardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  gameIconContainer: {
-    width: 48,
-    height: 48,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: theme.borderRadius.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: theme.spacing.md,
-  },
-  gameTextContainer: {
-    flex: 1,
-  },
-  gameTitle: {
-    ...theme.typography.h3,
-    color: theme.colors.textPrimary,
-  },
-  gameSubtitle: {
-    ...theme.typography.bodySmall,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 2,
   },
 });
